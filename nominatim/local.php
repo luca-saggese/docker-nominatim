@@ -6,7 +6,7 @@
  @define('CONST_Postgresql_Version', '9.4');
  @define('CONST_Postgis_Version', '2.3');
 
- @define('CONST_Osmosis_Binary', '/usr/local/bin/osmosis');
+ @define('CONST_Osmosis_Binary', '/usr/bin/osmosis');
  @define('CONST_Replication_Url', 'http://download.geofabrik.de/europe-updates');
  @define('CONST_Replication_MaxInterval', '40000');     // Process each update separately, osmosis cannot merge multiple updates
  @define('CONST_Replication_Update_Interval', '86400');  // How often upstream publishes diffs

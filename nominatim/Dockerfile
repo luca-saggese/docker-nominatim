@@ -82,7 +82,9 @@ RUN gosu nominatim /app/utils/setup.php --create-website /var/www/html/nominatim
 #constant update
 #RUN gosu nominatim /app/utils/supdate.php --import-osmosis-all --no-npi
 #or run
-#docker exec -it nominatim sudo -u nominatim ./src/utils/update.php --import-osmosis-all --no-npi
+#docker exec -it dockernominatim_nominatim_1 gosu nominatim /app/utils/setup.php --osmosis-init
+#docker exec -it dockernominatim_nominatim_1 gosu nominatim /app/utils/setup.php --create-functions --enable-diff-updates
+#docker exec -it dockernominatim_nominatim_1 gosu nominatim /app/utils/update.php --import-osmosis-all --no-npi
 
 
 VOLUME /importdata
