@@ -1,7 +1,8 @@
 version: '2.1'
 services:
   nominatim:
-    image: bringnow/nominatim
+    #image: bringnow/nominatim
+    image: lsaggese/nominatim
     volumes:
       - ${IMPORT_DATA_DIR:-./volumes/importdata}:/importdata
     environment:

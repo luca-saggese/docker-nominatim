@@ -4,7 +4,7 @@
 	require_once(dirname(dirname(__FILE__)).'/lib/init-website.php');
 	require_once(CONST_BasePath.'/lib/log.php');
 	require_once(CONST_BasePath.'/lib/PlaceLookup.php');
-	require_once(CONST_BasePath.'/lib/ReverseGeocodeWay.php');
+	require_once(CONST_BasePath.'/lib/ReverseGeocode.php');
 
 	if (strpos(CONST_BulkUserIPs, ','.$_SERVER["REMOTE_ADDR"].',') !== false)
 	{
