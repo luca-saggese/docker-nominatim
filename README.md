@@ -84,14 +84,20 @@ Then on the target machine, follow the steps from the [Getting Started](#getting
 
 # Update
 
+To initilize it
+  ```
+  docker exec -it dockernominatim_nominatim_1 gosu nominatim /app/utils/setup.php --osmosis-init
+  docker exec -it dockernominatim_nominatim_1 gosu nominatim /app/utils/setup.php --create-functions --enable-diff-updates
+  ```
+
 Full documentation for Nominatim update available [here](https://github.com/twain47/Nominatim/blob/master/docs/Import_and_update.md#updates). For a list of other methods see the output of:
   ```
-  docker exec -it nominatim sudo -u nominatim ./src/utils/update.php --help
+  docker exec -it dockernominatim_nominatim_1 gosu nominatim ./src/utils/update.php --help
   ```
 
 The following command will keep your database constantly up to date:
   ```
-  docker exec -it nominatim sudo -u nominatim ./src/utils/update.php --import-osmosis-all --no-npi
+  docker exec -it dockernominatim_nominatim_1 gosu nominatim /app/utils/update.php --import-osmosis-all --no-npi
   ```
 If you have imported multiple country extracts and want to keep them
 up-to-date, have a look at the script in
