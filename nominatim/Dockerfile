@@ -30,6 +30,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     postgresql-client \
     postgresql-server-dev-9.4 \
     proj-bin \
+    osmosis \
  && rm -rf /var/lib/apt/lists/*
 
 # Install gosu
@@ -64,7 +65,22 @@ COPY local.php ./settings/local.php
 COPY apache.conf /etc/apache2/sites-available/000-default.conf
 COPY apache2-foreground /usr/local/bin
 
+#patch Luca
+COPY address-json.php /app/lib/template/
+COPY ReverseGeocode.php /app/lib/
+COPY reverse.php /var/www/html/nominatim/
+
+
 RUN gosu nominatim /app/utils/setup.php --create-website /var/www/html/nominatim
+
+#updater
+RUN gosu nominatim /app/utils/setup.php --osmosis-init
+RUN gosu nominatim /app/utils/setup.php --create-functions --enable-diff-updates
+#constant update
+#RUN gosu nominatim /app/utils/supdate.php --import-osmosis-all --no-npi
+#or run
+#docker exec -it nominatim sudo -u nominatim ./src/utils/update.php --import-osmosis-all --no-npi
+
 
 VOLUME /importdata
 VOLUME /app/module

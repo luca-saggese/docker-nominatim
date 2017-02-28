@@ -56,6 +56,12 @@ Create a file `.env` in the working directory with any of the following variable
 * `EXTERNAL_PORT`: The external port (and ip address) to bind to (default `127.0.0.1:8080`)
 * `IMPORT_DATA_DIR`: The directory where the planet file `data.osm.pbf` is stored or downloaded to (default `./volumes/importdata`)
 
+* Configure incremental update. By default CONST_Replication_Url configured for Monaco.
+If you want a different update source, you will need to declare `CONST_Replication_Url` in local.php. Documentation [here] (https://github.com/twain47/Nominatim/blob/master/docs/Import_and_update.md#updates). For example, to use the daily country extracts diffs for Gemany from geofabrik add the following:
+  ```
+  @define('CONST_Replication_Url', 'http://download.geofabrik.de/europe/germany-updates');
+  ```
+
 ## Transferring prebuilt instance to another host
 
 Transferring the prebuilt instance basically means copying the contents of the PostgreSQL database, which in this setup are stored in the named docker volume  `nominatim-database`.
@@ -75,6 +81,21 @@ On the machine with the prebuilt nominatim instance, run the following steps:
   ```
 
 Then on the target machine, follow the steps from the [Getting Started](#getting-started) section but skip step 2, the creation of the volume.
+
+# Update
+
+Full documentation for Nominatim update available [here](https://github.com/twain47/Nominatim/blob/master/docs/Import_and_update.md#updates). For a list of other methods see the output of:
+  ```
+  docker exec -it nominatim sudo -u nominatim ./src/utils/update.php --help
+  ```
+
+The following command will keep your database constantly up to date:
+  ```
+  docker exec -it nominatim sudo -u nominatim ./src/utils/update.php --import-osmosis-all --no-npi
+  ```
+If you have imported multiple country extracts and want to keep them
+up-to-date, have a look at the script in
+[issue #60](https://github.com/twain47/Nominatim/issues/60).
 
 ## Alternatives
 
