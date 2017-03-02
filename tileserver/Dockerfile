@@ -174,7 +174,7 @@ COPY entrypoint.sh wait-for-it.sh ./
 COPY apache2-foreground /usr/local/bin
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    postgresql-server-dev-9.3 
+    postgresql-server-dev-9.3 \
  && rm -rf /var/lib/apt/lists/*
 
 VOLUME /importdata
