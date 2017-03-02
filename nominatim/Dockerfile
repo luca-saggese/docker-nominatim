@@ -30,7 +30,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     postgresql-client \
     proj-bin \
     osmosis \
-    vim \
+    vim \ 
  && rm -rf /var/lib/apt/lists/*
 
 # Install gosu
