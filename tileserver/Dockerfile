@@ -170,12 +170,13 @@ RUN chmod u+x /etc/init.d/renderd
 RUN rm -r /app/src
 
 WORKDIR /app
-COPY entrypoint.sh wait-for-it.sh ./
-COPY apache2-foreground /usr/local/bin
 
+COPY apache2-foreground /usr/local/bin
+#spostare su
 RUN apt-get update && apt-get install -y --no-install-recommends \
     postgresql-server-dev-9.3 \
  && rm -rf /var/lib/apt/lists/*
+#-----------
 COPY entrypoint.sh wait-for-it.sh ./
 
 VOLUME /importdata
