@@ -36,7 +36,7 @@ function initialization {
   fi
 
   log_info "==> Adding user tileserver to database"
-  #gosu tileserver createuser -SDR tileserver
+  gosu tileserver createuser -SDR tileserver
 
   log_info "==> Starting Import..."
   START_IMPORT=$(date +%s)

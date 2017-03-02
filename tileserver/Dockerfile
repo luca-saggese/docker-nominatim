@@ -51,6 +51,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     apache2-mpm-prefork \
     apache2-utils \
     automake \
+    postgresql-client \
+    postgresql-server-dev-9.4 \
     mapnik-utils \
     libmapnik-dev \
     vim \
