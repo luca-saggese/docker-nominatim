@@ -28,9 +28,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     php5-pgsql \
     php-pear \
     postgresql-client \
+    postgresql-server-dev-9.4 \
     proj-bin \
     osmosis \
-    vim \ 
+    vim \
  && rm -rf /var/lib/apt/lists/*
 
 # Install gosu
