@@ -20,7 +20,7 @@ services:
     volumes:
       - tileserver-database:/var/lib/postgresql/data
       - ./postgis/set-auth.sh:/docker-entrypoint-initdb.d/set-auth.sh
-      - ./postgis/ìinitdb-gis.sh:/docker-entrypoint-initdb.d/postgis.sh
+      - ./postgis/initdb-gis.sh:/docker-entrypoint-initdb.d/postgis.sh
       #- ./postgis/tune-postgres.sh:/docker-entrypoint-initdb.d/tune-postgres.sh
     volumes_from:
       - postgis:ro # Needed for the Tileserver PostgreSQL module
