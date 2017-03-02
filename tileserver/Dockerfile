@@ -153,8 +153,8 @@ RUN carto project.mml > OSMBright.xml
 
 COPY renderd.conf /usr/local/etc/renderd.conf
 
-RUN gosu chown tileserver /var/run/renderd
-RUN gosu chown tileserver /var/lib/mod_tile
+#RUN gosu chown tileserver /var/run/renderd
+#RUN gosu chown tileserver /var/lib/mod_tile
 
 COPY mod_tile.conf /etc/apache2/conf-available/mod_tile.conf
 
