@@ -134,7 +134,6 @@ RUN rm ne_10m_populated_places_simple.zip
 WORKDIR /app/maps/style/
 
 RUN unzip '*.zip'
-RUN rm '*.zip'
 RUN mkdir osm-bright-master/shp
 RUN mv land-polygons-split-3857 osm-bright-master/shp/
 RUN mv simplified-land-polygons-complete-3857 osm-bright-master/shp/
