@@ -153,9 +153,7 @@ RUN carto project.mml > OSMBright.xml
 
 COPY renderd.conf /usr/local/etc/renderd.conf
 
-RUN mkdir /var/run/renderd
 RUN chown tileserver /var/run/renderd
-RUN mkdir /var/lib/mod_tile
 RUN chown tileserver /var/lib/mod_tile
 
 COPY mod_tile.conf /etc/apache2/conf-available/mod_tile.conf
@@ -163,19 +161,8 @@ COPY mod_tile.conf /etc/apache2/conf-available/mod_tile.conf
 COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
 
 RUN a2enconf mod_tile
-#RUN service apache2 reload
 
-RUN mkdir /app/maps/planet
-RUN chown tileserver /app/maps/planet
-WORKDIR /app/maps/planet
-RUN wget http://download.geofabrik.de/europe/italy/centro-latest.osm.pbf
-#RUN osm2pgsql --slim -d gis -C 16000 --number-processes 3 /app/planet/centro-latest.osm.pbf
-
-RUN mkdir /var/run/renderd
-RUN chown tileserver /var/run/renderd
-RUN gosu -u tileserver renderd -f -c /usr/local/etc/renderd.conf
-
-RUN cp  /app/src/mod_tile/debian/renderd.init /etc/init.d/renderd
+COPY renderd.init /etc/init.d/renderd
 RUN chmod u+x /etc/init.d/renderd
 
 RUN rm -r /app/src
