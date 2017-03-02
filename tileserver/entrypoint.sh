@@ -36,7 +36,7 @@ function initialization {
   fi
 
   log_info "==> Adding user tileserver to database"
-  gosu postgres createuser -SDR tileserver
+  gosu tileserver createuser -SDR tileserver
 
   log_info "==> Starting Import..."
   START_IMPORT=$(date +%s)
@@ -52,7 +52,7 @@ function initialization {
 log_info "==> Waiting for database to come up..."
 ./wait-for-it.sh -s -t 300 ${PGHOST}:5432 || die "Database did not respond"
 
-if gosu tileserver psql -lqt | cut -d \| -f 1 | grep -qw gis; then
+if gosu postgres psql -lqt | cut -d \| -f 1 | grep -qw gis; then
     log_info "Database tileserver already exists, skipping initialization."
 else
     log_info "Container has not been initialized, will start initial import now!"
