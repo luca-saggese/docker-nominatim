@@ -167,6 +167,10 @@ RUN chmod u+x /etc/init.d/renderd
 
 RUN rm -r /app/src
 
+WORKDIR /app
+COPY entrypoint.sh wait-for-it.sh ./
+COPY apache2-foreground /usr/local/bin
+
 VOLUME /importdata
 VOLUME /app/module
 CMD /app/entrypoint.sh

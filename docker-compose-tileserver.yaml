@@ -23,7 +23,7 @@ services:
       #- ./postgis/ìinitdb-gis.sh:/docker-entrypoint-initdb.d/postgis.sh
       #- ./postgis/tune-postgres.sh:/docker-entrypoint-initdb.d/tune-postgres.sh
     volumes_from:
-      - tileserver:ro # Needed for the Tileserver PostgreSQL module
+      - postgis:ro # Needed for the Tileserver PostgreSQL module
 volumes:
   tileserver-database:
     external: true
