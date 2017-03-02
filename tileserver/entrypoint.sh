@@ -39,6 +39,7 @@ function initialization {
   #gosu postgres createuser -SDR tileserver
   #createuser tileserver -s --superuser # answer yes for superuser (although this isn't strictly necessary)
   gosu postgres createdb -E UTF8 -O tileserver gis
+  psql -U tileserver gis  -c "CREATE EXTENSION postgis;"
 
   log_info "==> Starting Import..."
   START_IMPORT=$(date +%s)
