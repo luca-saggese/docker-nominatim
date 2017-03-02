@@ -36,7 +36,7 @@ function initialization {
   fi
 
   log_info "==> Adding user tileserver to database"
-  gosu postgres createuser -SDR tileserver
+  #gosu postgres createuser -SDR tileserver
   #createuser tileserver -s --superuser # answer yes for superuser (although this isn't strictly necessary)
   gosu postgres createdb -E UTF8 -O tileserver gis
 
