@@ -57,7 +57,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libmapnik-dev \
     postgresql-server-dev-9.3 \
     vim \
- && rm -rf /var/lib/apt/lists/*
+ && rm -rf /var/lib/apt/lists/* && apt-get clean
 
 # Install gosu
 ENV GOSU_VERSION 1.9
@@ -127,6 +127,7 @@ RUN chown tileserver /app/maps/style
 WORKDIR /app/maps/style
 RUN mkdir -p /app/maps/style/ne_10m_populated_places_simple
 RUN mkdir -p /app/maps/style/osm-bright-master/shp
+WORKDIR /app/maps/style/osm-bright-master/shp/
 RUN \
     wget https://github.com/mapbox/osm-bright/archive/master.zip ;\
     wget http://data.openstreetmapdata.com/simplified-land-polygons-complete-3857.zip ;\
@@ -140,9 +141,10 @@ RUN wget http://www.naturalearthdata.com/http//www.naturalearthdata.com/download
 WORKDIR /app/maps/style/
 
 
-RUN mv land-polygons-split-3857 osm-bright-master/shp/
-RUN mv simplified-land-polygons-complete-3857 osm-bright-master/shp/
-RUN mv ne_10m_populated_places_simple osm-bright-master/shp/
+#RUN mv land-polygons-split-3857 osm-bright-master/shp/
+#RUN mv simplified-land-polygons-complete-3857 osm-bright-master/shp/
+#RUN mv ne_10m_populated_places_simple osm-bright-master/shp/
+
 #To improve performance, we create index files for the larger shapefiles:
 WORKDIR /app/maps/style/osm-bright-master/shp/land-polygons-split-3857
 RUN shapeindex land_polygons.shp
