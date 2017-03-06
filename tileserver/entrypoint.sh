@@ -53,7 +53,7 @@ function initialization {
 }
 
 log_info "==> Waiting for database to come up..."
-sleep 20s
+#sleep 20s
 ./wait-for-it.sh -s -t 300 ${PGHOST}:5432 || die "Database did not respond"
 
 if gosu postgres psql -lqt | cut -d \| -f 1 | grep -qw gis; then
@@ -62,5 +62,7 @@ else
     log_info "Container has not been initialized, will start initial import now!"
     initialization
 fi
+
+/etc/init.d/renderd start
 
 apache2-foreground "$@"
