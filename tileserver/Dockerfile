@@ -126,10 +126,12 @@ RUN mkdir -p /app/maps/style
 RUN chown tileserver /app/maps/style
 WORKDIR /app/maps/style
 RUN mkdir -p /app/maps/style/ne_10m_populated_places_simple
+RUN wget https://github.com/mapbox/osm-bright/archive/master.zip ;\
+    unzip '*.zip' && rm *.zip
+    
 RUN mkdir -p /app/maps/style/osm-bright-master/shp
 WORKDIR /app/maps/style/osm-bright-master/shp/
 RUN \
-    wget https://github.com/mapbox/osm-bright/archive/master.zip ;\
     wget http://data.openstreetmapdata.com/simplified-land-polygons-complete-3857.zip ;\
     wget http://data.openstreetmapdata.com/land-polygons-split-3857.zip ;\
     unzip '*.zip' && rm *.zip
