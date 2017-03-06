@@ -155,8 +155,9 @@ RUN carto project.mml > OSMBright.xml
 
 COPY renderd.conf /usr/local/etc/renderd.conf
 
-#RUN gosu chown tileserver /var/run/renderd
-#RUN gosu chown tileserver /var/lib/mod_tile
+RUN mkdir /var/lib/mod_tile
+RUN chown tileserver /var/run/renderd
+RUN chown tileserver /var/lib/mod_tile
 
 COPY mod_tile.conf /etc/apache2/conf-available/mod_tile.conf
 
@@ -179,8 +180,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 #-----------
 COPY entrypoint.sh wait-for-it.sh ./
 
-RUN mkdir /var/lib/mod_tile
-#RUN gosu chown tileserver /var/lib/mod_tile
+
 COPY mod_tile.load /etc/apache2/mods-available/mod_tile.load
 RUN ln -s /etc/apache2/mods-available/mod_tile.load /etc/apache2/mods-enabled/
 

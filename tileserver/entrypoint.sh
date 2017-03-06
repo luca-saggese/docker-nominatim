@@ -63,6 +63,7 @@ else
     initialization
 fi
 
+#renderd -f -c /usr/local/etc/renderd.conf
 /etc/init.d/renderd start
 
 apache2-foreground "$@"
