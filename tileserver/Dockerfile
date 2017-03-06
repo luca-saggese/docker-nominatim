@@ -55,6 +55,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     postgresql-client-common \
     mapnik-utils \
     libmapnik-dev \
+    postgresql-server-dev-9.3 \
     vim \
  && rm -rf /var/lib/apt/lists/*
 
@@ -124,18 +125,21 @@ WORKDIR /app
 RUN mkdir -p /app/maps/style
 RUN chown tileserver /app/maps/style
 WORKDIR /app/maps/style
-RUN wget https://github.com/mapbox/osm-bright/archive/master.zip
-RUN wget http://data.openstreetmapdata.com/simplified-land-polygons-complete-3857.zip
-RUN wget http://data.openstreetmapdata.com/land-polygons-split-3857.zip
 RUN mkdir ne_10m_populated_places_simple
+RUN mkdir osm-bright-master/shp
+RUN \
+    wget https://github.com/mapbox/osm-bright/archive/master.zip ;\
+    wget http://data.openstreetmapdata.com/simplified-land-polygons-complete-3857.zip ;\
+    wget http://data.openstreetmapdata.com/land-polygons-split-3857.zip ;\
+    unzip '*.zip' && rm *.zip
+
 WORKDIR /app/maps/style/ne_10m_populated_places_simple
-RUN wget http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_populated_places_simple.zip
-RUN unzip ne_10m_populated_places_simple.zip
-RUN rm ne_10m_populated_places_simple.zip
+RUN wget http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_populated_places_simple.zip ;\
+    unzip ne_10m_populated_places_simple.zip && rm ne_10m_populated_places_simple.zip
+
 WORKDIR /app/maps/style/
 
-RUN unzip '*.zip'
-RUN mkdir osm-bright-master/shp
+
 RUN mv land-polygons-split-3857 osm-bright-master/shp/
 RUN mv simplified-land-polygons-complete-3857 osm-bright-master/shp/
 RUN mv ne_10m_populated_places_simple osm-bright-master/shp/
@@ -173,11 +177,7 @@ RUN rm -r /app/src
 WORKDIR /app
 
 COPY apache2-foreground /usr/local/bin
-#spostare su
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    postgresql-server-dev-9.3 \
- && rm -rf /var/lib/apt/lists/*
-#-----------
+
 COPY entrypoint.sh wait-for-it.sh ./
 
 
