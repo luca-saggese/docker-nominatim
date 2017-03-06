@@ -179,6 +179,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 #-----------
 COPY entrypoint.sh wait-for-it.sh ./
 
+RUN mkdir /var/lib/mod_tile
+RUN gosu chown tileserver:tileserver /var/lib/mod_tile
+
 VOLUME /importdata
 VOLUME /app/module
 CMD /app/entrypoint.sh
