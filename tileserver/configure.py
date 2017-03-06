@@ -46,4 +46,4 @@ config["land-low"] = path.join(getcwd(),"shp/simplified-land-polygons-complete-3
 #  or
 # - http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_populated_places.zip
 
-config["ne_places"] = path.join(getcwd(),"shp/ne_10m_populated_places/ne_10m_populated_places.shp")
+config["ne_places"] = path.join(getcwd(),"shp/ne_10m_populated_places_simple/ne_10m_populated_places_simple.shp")
