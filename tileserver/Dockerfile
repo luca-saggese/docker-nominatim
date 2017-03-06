@@ -181,6 +181,11 @@ COPY entrypoint.sh wait-for-it.sh ./
 
 RUN mkdir /var/lib/mod_tile
 RUN gosu chown tileserver:tileserver /var/lib/mod_tile
+COPY mod_tile.load /etc/apache2/mods-available/mod_tile.load
+RUN ln -s /etc/apache2/mods-available/mod_tile.load /etc/apache2/mods-enabled/
+RUN mkdir /var/www/osm
+COPY index.html /var/www/osm/
+
 
 VOLUME /importdata
 VOLUME /app/module
