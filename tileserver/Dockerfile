@@ -188,5 +188,5 @@ COPY index.html /var/www/osm/
 
 
 VOLUME /importdata
-VOLUME /app/module
+VOLUME /app/module 
 CMD /app/entrypoint.sh
