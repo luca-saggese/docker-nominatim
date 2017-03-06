@@ -23,6 +23,7 @@ PIDFILE=$PIDSOCKDIR/$NAME.pid
 SCRIPTNAME=/etc/init.d/$NAME
 RUNASUSER=tileserver
 
+
 # Exit if the package is not installed
 [ -x "$DAEMON" ] || exit 0
 
